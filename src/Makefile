@@ -25,6 +25,8 @@ INCLUDES  = -I../include
 COMMON += $(OBJDIR)libbpf_helpers.o
 COMMON += $(OBJDIR)str_utils.o
 
+.PRECIOUS: $(OBJDIR)%.o
+
 all: build $(MODS)
 
 build:
