@@ -38,7 +38,9 @@ static bool fdb_map_verify(int map_fd)
 	if (info.type != BPF_MAP_TYPE_HASH ||
 	    info.key_size != sizeof(struct fdb_key) ||
 	    info.value_size != sizeof(__u32)) {
-		fprintf(stderr, "Incompatible map\n");
+		fprintf(stderr,
+			"Incompatible map for fdb: type %d key %d val %d\n",
+			info.type, info.key_size, info.value_size);
 		return false;
 	}
 
@@ -62,7 +64,9 @@ static bool ports_map_verify(int ports_fd, bool *with_prog)
 	if (info.type != BPF_MAP_TYPE_DEVMAP_HASH ||
 	    info.key_size != sizeof(__u32) ||
 	    (info.value_size != sizeof(__u32) && !with_prog)) {
-		fprintf(stderr, "Incompatible map\n");
+		fprintf(stderr,
+			"Incompatible map for ports: type %d key %d val %d\n",
+			info.type, info.key_size, info.value_size);
 		return false;
 	}
 
