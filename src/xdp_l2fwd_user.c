@@ -357,10 +357,12 @@ int main(int argc, char **argv)
 		return show_ports_entries(ports_fd) ? : ret;
 	}
 
-	pval.bpf_prog.fd = bpf_prog_get_fd(bpf_prog_id, bpf_prog_path, NULL,
-					   "redirect program");
-	if (pval.bpf_prog.fd < 0)
-		return 1;
+	if (bpf_prog_id || bpf_prog_path) {
+		pval.bpf_prog.fd = bpf_prog_get_fd(bpf_prog_id, bpf_prog_path, NULL,
+						   "redirect program");
+		if (pval.bpf_prog.fd < 0)
+			return 1;
+	}
 
 	if (!pval.ifindex) {
 		fprintf(stderr, "Device index not given\n");
