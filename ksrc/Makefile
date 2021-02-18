@@ -8,6 +8,7 @@ else
 OBJDIR = obj/
 endif
 
+MODS += $(OBJDIR)xdp_dummy.o
 MODS += $(OBJDIR)xdp_l2fwd.o
 MODS += $(OBJDIR)tc_l2fwd.o
 
